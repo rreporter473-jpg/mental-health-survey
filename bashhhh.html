@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استبيان الصحة النفسية</title>
+    <script>
+        function calculateResult() {
+            var score = 0;
+
+            // حساب الدرجات بناءً على الإجابات
+            var questions = [
+                "family_problems", "disability", "loneliness", "health_problems", "addiction",
+                "social", "married", "love_story", "intelligence", "ambition", "stress", "depression",
+                "no_motivation", "sleep_issues", "appetite_changes", "prefer_alone", "pressure",
+                "consulted_psychologist"
+            ];
+
+            // التحقق من إجابات المستخدم
+            questions.forEach(function(question) {
+                var yesOption = document.querySelector(`input[name="${question}"][value="نعم"]`);
+                if (yesOption && yesOption.checked) {
+                    score++;
+                }
+            });
+
+            // تحديد درجة الاكتئاب
+            var depressionDegree;
+            if (score <= 5) {
+                depressionDegree = "درجة أولى (اكتئاب بسيط)";
+            } else if (score > 5 && score <= 10) {
+                depressionDegree = "درجة ثانية (اكتئاب متوسط)";
+            } else if (score > 10 && score <= 15) {
+                depressionDegree = "درجة ثالثة (اكتئاب شديد)";
+            } else {
+                depressionDegree = "مضطرب نفسيًا";
+            }
+
+            // عرض النتيجة
+            var resultText = `نتيجتك: ${depressionDegree}<br><br>`;
+            resultText += "العلاج المقترح:<br>1. الرياضة<br>2. التنفس<br>3. الحب<br>4. العمل<br>5. الاختلاط مع الناس";
+
+            document.getElementById("result").innerHTML = resultText;
+            return false;  // منع إرسال النموذج
+        }
+    </script>
+</head>
+<body>
+    <h1>استبيان الصحة النفسية</h1>
+    <form onsubmit="return calculateResult()">
+        <!-- السؤال 1 -->
+        <label for="name">اسمك:</label><br>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <!-- السؤال 2 -->
+        <label for="mother_name">اسم أمك:</label><br>
+        <input type="text" id="mother_name" name="mother_name" required><br><br>
+
+        <!-- السؤال 3 -->
+        <label>هل لديك مشاكل عائلية؟</label><br>
+        <input type="radio" id="family_yes" name="family_problems" value="نعم">
+        <label for="family_yes">نعم</label><br>
+        <input type="radio" id="family_no" name="family_problems" value="لا">
+        <label for="family_no">لا</label><br><br>
+
+        <!-- السؤال 4 -->
+        <label>هل لديك إعاقة جسدية؟</label><br>
+        <input type="radio" id="disability_yes" name="disability" value="نعم">
+        <label for="disability_yes">نعم</label><br>
+        <input type="radio" id="disability_no" name="disability" value="لا">
+        <label for="disability_no">لا</label><br><br>
+
+        <!-- السؤال 5 -->
+        <label>هل أنت وحيد في أسرتك؟</label><br>
+        <input type="radio" id="lonely_yes" name="loneliness" value="نعم">
+        <label for="lonely_yes">نعم</label><br>
+        <input type="radio" id="lonely_no" name="loneliness" value="لا">
+        <label for="lonely_no">لا</label><br><br>
+
+        <!-- السؤال 6 -->
+        <label>هل لديك مشاكل مرضية؟</label><br>
+        <input type="radio" id="health_yes" name="health_problems" value="نعم">
+        <label for="health_yes">نعم</label><br>
+        <input type="radio" id="health_no" name="health_problems" value="لا">
+        <label for="health_no">لا</label><br><br>
+
+        <!-- السؤال 7 -->
+        <label>هل أنت مدمن أو متعاطي أو شارب كحوليات أو مدمن على أي نوع من المخدرات؟</label><br>
+        <input type="radio" id="addiction_yes" name="addiction" value="نعم">
+        <label for="addiction_yes">نعم</label><br>
+        <input type="radio" id="addiction_no" name="addiction" value="لا">
+        <label for="addiction_no">لا</label><br><br>
+
+        <!-- السؤال 8 -->
+        <label>هل أنت اجتماعي؟</label><br>
+        <input type="radio" id="social_yes" name="social" value="نعم">
+        <label for="social_yes">نعم</label><br>
+        <input type="radio" id="social_no" name="social" value="لا">
+        <label for="social_no">لا</label><br><br>
+
+        <!-- السؤال 9 -->
+        <label>هل أنت متزوج؟</label><br>
+        <input type="radio" id="married_yes" name="married" value="نعم">
+        <label for="married_yes">نعم</label><br>
+        <input type="radio" id="married_no" name="married" value="لا">
+        <label for="married_no">لا</label><br><br>
+
+        <!-- السؤال 10 -->
+        <label>هل عشت قصة حب؟</label><br>
+        <input type="radio" id="love_yes" name="love_story" value="نعم">
+        <label for="love_yes">نعم</label><br>
+        <input type="radio" id="love_no" name="love_story" value="لا">
+        <label for="love_no">لا</label><br><br>
+
+        <!-- السؤال 11 -->
+        <label>هل أنت ذكي في الدراسة؟</label><br>
+        <input type="radio" id="smart_yes" name="intelligence" value="نعم">
+        <label for="smart_yes">نعم</label><br>
+        <input type="radio" id="smart_no" name="intelligence" value="لا">
+        <label for="smart_no">لا</label><br><br>
+
+        <!-- السؤال 12 -->
+        <label>هل لديك طموح وآمال؟</label><br>
+        <input type="radio" id="ambitious_yes" name="ambition" value="نعم">
+        <label for="ambitious_yes">نعم</label><br>
+        <input type="radio" id="ambitious_no" name="ambition" value="لا">
+        <label for="ambitious_no">لا</label><br><br>
+
+        <!-- السؤال 13 -->
+        <label>هل تشعر بالتوتر أو القلق بشكل مستمر؟</label><br>
+        <input type="radio" id="stress_yes" name="stress" value="نعم">
+        <label for="stress_yes">نعم</label><br>
+        <input type="radio" id="stress_no" name="stress" value="لا">
+        <label for="stress_no">لا</label><br><br>
+
+        <!-- السؤال 14 -->
+        <label>هل لديك مشاعر حزن أو اكتئاب؟</label><br>
+        <input type="radio" id="depressed_yes" name="depression" value="نعم">
+        <label for="depressed_yes">نعم</label><br>
+        <input type="radio" id="depressed_no" name="depression" value="لا">
+        <label for="depressed_no">لا</label><br><br>
+
+        <!-- السؤال 15 -->
+        <label>هل تشعر بأنك بلا هدف أو فاقد للحافز؟</label><br>
+        <input type="radio" id="no_motivation_yes" name="no_motivation" value="نعم">
+        <label for="no_motivation_yes">نعم</label><br>
+        <input type="radio" id="no_motivation_no" name="no_motivation" value="لا">
+        <label for="no_motivation_no">لا</label><br><br>
+
+        <!-- السؤال 16 -->
+        <label>هل تعاني من صعوبات في النوم أو تجد صعوبة في الاستيقاظ؟</label><br>
+        <input type="radio" id="sleep_issues_yes" name="sleep_issues" value="نعم">
+        <label for="sleep_issues_yes">نعم</label><br>
+        <input type="radio" id="sleep_issues_no" name="sleep_issues" value="لا">
+        <label for="sleep_issues_no">لا</label><br><br>
+
+        <!-- السؤال 17 -->
+        <label>هل تشتكي من تغييرات في الشهية أو الوزن؟</label><br>
+        <input type="radio" id="appetite_changes_yes" name="appetite_changes" value="نعم">
+        <label for="appetite_changes_yes">نعم</label><br>
+        <input type="radio" id="appetite_changes_no" name="appetite_changes" value="لا">
+        <label for="appetite_changes_no">لا</label><br><br>
+
+        <!-- السؤال 18 -->
+        <label>هل تفضل البقاء وحيدًا أم تستمتع بالتواجد مع الآخرين؟</label><br>
+        <input type="radio" id="alone_yes" name="prefer_alone" value="نعم">
+        <label for="alone_yes">نعم</label><br>
+        <input type="radio" id="alone_no" name="prefer_alone" value="لا">
+        <label for="alone_no">لا</label><br><br>
+
+        <!-- السؤال 19 -->
+        <label>هل تشعر بأنك تحت ضغط مستمر؟</label><br>
+        <input type="radio" id="pressure_yes" name="pressure" value="نعم">
+        <label for="pressure_yes">نعم</label><br>
+        <input type="radio" id="pressure_no" name="pressure" value="لا">
+        <label for="pressure_no">لا</label><br><br>
+
+        <!-- السؤال 20 -->
+        <label>هل جربت التحدث مع مختص في الصحة النفسية من قبل؟</label><br>
+        <input type="radio" id="consulted_yes" name="consulted_psychologist" value="نعم">
+        <label for="consulted_yes">نعم</label><br>
+        <input type="radio" id="consulted_no" name="consulted_psychologist" value="لا">
+        <label for="consulted_no">لا</label><br><br>
+
+        <input type="submit" value="إرسال">
+    </form>
+
+    <div id="result"></div>
+</body>
+</html>
